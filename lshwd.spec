@@ -7,6 +7,7 @@ Group:		Applications/System
 Source0:	http://user-contributions.org/projects/lshwd/source/%{name}-%{version}.tar.gz
 # Source0-md5:	493ae06aada341f0bde063aab3c4167f
 URL:		http://user-contributions.org/projects/lshwd/
+BuildRequires:	kernel-headers
 BuildRequires:	libusb-devel
 BuildRequires:	pciutils-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -24,7 +25,7 @@ then parsed for generic names and changes accordingly.
 %build
 %{__make} \
 	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags}"
+	CFLAGS="%{rpmcflags} -I. -I%{_kernelsrcdir}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
